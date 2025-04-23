@@ -12,6 +12,10 @@ const Bookmark = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,

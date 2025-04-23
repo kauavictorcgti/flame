@@ -184,6 +184,20 @@ export const BookmarksForm = ({
         />
       </InputGroup>
 
+      {/* DESCRIPTION */}
+      <InputGroup>
+        <label htmlFor="description">Bookmark Description</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          placeholder="It's my switch"
+          required
+          value={formData.description}
+          onChange={(e) => inputChangeHandler(e)}
+        />
+      </InputGroup>
+
       {/* CATEGORY */}
       <InputGroup>
         <label htmlFor="categoryId">Bookmark Category</label>

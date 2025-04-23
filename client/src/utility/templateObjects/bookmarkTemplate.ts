@@ -3,6 +3,7 @@ import { Bookmark, NewBookmark } from '../../interfaces';
 export const newBookmarkTemplate: NewBookmark = {
   name: '',
   url: '',
+  description: '',
   categoryId: -1,
   icon: '',
   isPublic: true,

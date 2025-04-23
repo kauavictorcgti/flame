@@ -2,6 +2,14 @@
   margin-bottom: 30px;
 }
 
+.BookmarkCard a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: all .2s ease-in-out;
+}
+
 .BookmarkCard h3 {
   color: var(--color-accent);
   margin-bottom: 10px;
@@ -19,25 +27,15 @@
   flex-direction: column;
 }
 
-.Bookmarks a {
-  line-height: 2;
-  transition: all 0.25s;
-  display: flex;
-}
-
 .BookmarkCard a:hover {
   text-decoration: underline;
   padding-left: 10px;
 }
 
 .BookmarkIcon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  margin-top: 3px;
-  margin-right: 2px;
-  justify-content: center;
-  align-items: center;
+  width: 35px;
+  height: 35px;
+  margin-right: 0.5em;
 }
 
 .BookmarkIconSvg {
@@ -53,4 +51,22 @@
   height: 90%;
   margin-top: 2px;
   object-fit: contain;
+}
+
+.BookmarkCardDetails {
+  text-transform: uppercase;
+}
+
+.BookmarkCardDetails h5 {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: -4px;
+}
+
+.BookmarkCardDetails span {
+  color: var(--color-accent);
+  font-weight: 400;
+  font-size: 0.8em;
+  opacity: 1;
 }

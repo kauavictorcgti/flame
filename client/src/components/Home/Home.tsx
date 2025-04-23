@@ -24,6 +24,7 @@ import { Header } from './Header/Header';
 
 // Utils
 import { escapeRegex } from '../../utility';
+import { regexSearch } from '../../utility/regexSearch';
 
 export const Home = (): JSX.Element => {
   const {
@@ -72,17 +73,24 @@ export const Home = (): JSX.Element => {
       ]);
 
       // Search through bookmarks
-      const category = { ...categories[0] };
 
-      category.name = 'Search Results';
-      category.bookmarks = categories
-        .map(({ bookmarks }) => bookmarks)
-        .flat()
-        .filter(({ name }) =>
-          new RegExp(escapeRegex(localSearch), 'i').test(name)
-        );
+      const categoriesFiltered = categories.filter(({ name }) => {
+        return regexSearch(localSearch, name)
+      })
 
-      setBookmarkSearchResult([category]);
+      const bookmarkFiltered = categories.map((category) => {
+        const bm = { ...category }
+        bm.bookmarks = category.bookmarks.filter((bookmark) => {
+          return regexSearch(localSearch, `${bookmark.name} ${bookmark.description}`)
+        })
+
+        return bm
+      }).filter(({ bookmarks }) => bookmarks.length > 0)
+
+      const namesInArr1 = new Set(categoriesFiltered.map(item => item.name));
+      const uniqueItemsFromArr2 = bookmarkFiltered.filter(item => !namesInArr1.has(item.name));
+
+      setBookmarkSearchResult([...categoriesFiltered, ...uniqueItemsFromArr2]);
     } else {
       setAppSearchResult(null);
       setBookmarkSearchResult(null);
@@ -104,8 +112,8 @@ export const Home = (): JSX.Element => {
       <Header />
 
       {!isAuthenticated &&
-      !apps.some((a) => a.isPinned) &&
-      !categories.some((c) => c.isPinned) ? (
+        !apps.some((a) => a.isPinned) &&
+        !categories.some((c) => c.isPinned) ? (
         <Message>
           Welcome to Flame! Go to <Link to="/settings/app">/settings</Link>,
           login and start customizing your new homepage
@@ -137,7 +145,7 @@ export const Home = (): JSX.Element => {
       )}
 
       {!config.hideCategories &&
-      (isAuthenticated || categories.some((c) => c.isPinned)) ? (
+        (isAuthenticated || categories.some((c) => c.isPinned)) ? (
         <Fragment>
           <SectionHeadline title="Bookmarks" link="/bookmarks" />
           {bookmarksLoading ? (
@@ -147,8 +155,8 @@ export const Home = (): JSX.Element => {
               categories={
                 !bookmarkSearchResult
                   ? categories.filter(
-                      ({ isPinned, bookmarks }) => isPinned && bookmarks.length
-                    )
+                    ({ isPinned, bookmarks }) => isPinned && bookmarks.length
+                  )
                   : bookmarkSearchResult
               }
               totalCategories={categories.length}

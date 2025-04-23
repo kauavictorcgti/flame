@@ -93,9 +93,13 @@ export const BookmarkCard = (props: Props): JSX.Element => {
               target={config.bookmarksSameTab ? '' : '_blank'}
               rel="noreferrer"
               key={`bookmark-${bookmark.id}`}
+              className={classes.BookmarkCard}
             >
-              {bookmark.icon && iconEl}
-              {bookmark.name}
+              <div className={classes.BookmarkCardIcon}>{bookmark.icon && iconEl}</div>
+              <div className={classes.BookmarkCardDetails}>
+                <h5>{bookmark.name}</h5>
+                <span>{bookmark.description}</span>
+              </div>
             </a>
           );
         })}

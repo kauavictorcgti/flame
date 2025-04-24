@@ -65,9 +65,9 @@ export const Home = (): JSX.Element => {
     if (localSearch) {
       // Search through apps
       setAppSearchResult([
-        ...apps.filter(({ name, description }) =>
+        ...apps.filter(({ name, description, url }) =>
           new RegExp(escapeRegex(localSearch), 'i').test(
-            `${name} ${description}`
+            `${name} ${description} ${url}`
           )
         ),
       ]);
@@ -81,7 +81,7 @@ export const Home = (): JSX.Element => {
       const bookmarkFiltered = categories.map((category) => {
         const bm = { ...category }
         bm.bookmarks = category.bookmarks.filter((bookmark) => {
-          return regexSearch(localSearch, `${bookmark.name} ${bookmark.description}`)
+          return regexSearch(localSearch, `${bookmark.name} ${bookmark.description} ${bookmark.url}`)
         })
 
         return bm

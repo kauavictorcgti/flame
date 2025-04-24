@@ -98,7 +98,7 @@ export const BookmarkCard = (props: Props): JSX.Element => {
               <div className={classes.BookmarkCardIcon}>{bookmark.icon && iconEl}</div>
               <div className={classes.BookmarkCardDetails}>
                 <h5>{bookmark.name}</h5>
-                <span>{bookmark.description}</span>
+                <span>{bookmark.description || bookmark.url}</span>
               </div>
             </a>
           );

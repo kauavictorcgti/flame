@@ -192,7 +192,6 @@ export const BookmarksForm = ({
           name="description"
           id="description"
           placeholder="It's my switch"
-          required
           value={formData.description}
           onChange={(e) => inputChangeHandler(e)}
         />
